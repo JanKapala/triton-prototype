@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "triton-prototype"
+version = "1.0.0"
+description = ""
+authors = ["Jan <jankapala@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pre-commit = "^3.6.2"
+torch = "^2.2.1"
+pillow = "^10.2.0"
+numpy = "^1.26.4"
+torchvision = "^0.17.1"
+tritonclient = {extras = ["http"], version = "^2.43.0"}
+mypy = "^1.9.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.2.0"
+pre-commit = "^3.6.2"
+invoke = "^2.2.0"
+mypy = "^1.9.0"
+isort = "^5.13.2"
+pylint = "^3.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+ignore_missing_imports = true
+strict = true
+
+[tool.isort]
+profile = "black"
+line_length = 80
+
+[tool.pylint]
+max-line-length = 80
+
+[tool.pylint."messages_control"]
+disable = [
+    "missing-module-docstring",
+    "missing-function-docstring",
+    "protected-access",
+    "no-name-in-module"
+]
+
+[tool.black]
+line-length = 80

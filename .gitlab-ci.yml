@@ -1,0 +1,35 @@
+image: python:3.11.5
+
+stages:
+    - testing
+    - deployment
+
+.build: &build
+    before_script:
+        - curl -sSL https://install.python-poetry.org | python3 -
+        - export PATH="/root/.local/bin:$PATH"
+        - poetry install
+
+black:
+    stage: testing
+    <<: *build
+    script:
+        - poetry run inv black --only-check
+
+mypy:
+     stage: testing
+     <<: *build
+     script:
+         - poetry run inv mypy
+
+isort:
+    stage: testing
+    <<: *build
+    script:
+        - poetry run inv isort --only-check
+
+pylint:
+    stage: testing
+    <<: *build
+    script:
+        - poetry run inv lint
